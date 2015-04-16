@@ -8,6 +8,10 @@ security:
             algorithm: sha512
             encode_as_base64: true
             iterations: 5000
+        Rick\AppBundle\Entity\Admin:
+            algorithm: sha512
+            encode_as_base64: true
+            iterations: 5000
 
     # http://symfony.com/doc/current/book/security.html#hierarchical-roles
     role_hierarchy:
@@ -18,14 +22,16 @@ security:
     providers:
         chain_provider:
             chain:
-                providers: [in_memory, user_db]
+                providers: [in_memory, user_db, admin_db]
         in_memory:
             memory:
                 users:
                     user:  { password: userpass, roles: [ 'ROLE_USER' ] }
                     admin: { password: adminpass, roles: [ 'ROLE_ADMIN' ] }
         user_db:
-            entity: { class: Rick\AppBundle\Entity\User, property: username }
+            entity: { class: Rick\AppBundle\Entity\User }
+        admin_db:
+            entity: { class: Rick\AppBundle\Entity\Admin }
 
     # the main part of the security, where you can set up firewalls
     # for specific sections of your app

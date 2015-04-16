@@ -1,7 +1,7 @@
-Rick\AppBundle\Entity\User:
+Rick\AppBundle\Entity\Admin:
     type: entity
-    table: users
-    repositoryClass: Rick\AppBundle\Entity\UserRepository
+    table: admins
+    repositoryClass: Rick\AppBundle\Entity\AdminRepository
     id:
         id:
             type: integer
@@ -9,7 +9,7 @@ Rick\AppBundle\Entity\User:
             generator:
                 strategy: AUTO
     fields:
-        username:
+        adminname:
             type: string
             length: 255
         name:
@@ -19,6 +19,9 @@ Rick\AppBundle\Entity\User:
             type: string
             length: '100'
         email:
+            type: string
+            length: '100'
+        salt:
             type: string
             length: '100'
     lifecycleCallbacks: {  }

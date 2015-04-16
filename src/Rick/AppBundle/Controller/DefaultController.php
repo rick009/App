@@ -2,7 +2,6 @@
 
 namespace Rick\AppBundle\Controller;
 
-use Rick\AppBundle\Entity\User;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Security\Core\SecurityContext;
 use Symfony\Component\HttpFoundation\Request;
