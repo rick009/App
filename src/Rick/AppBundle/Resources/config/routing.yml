@@ -1,0 +1,13 @@
+rick_app_login:
+    path:     /login
+    defaults: { _controller: RickAppBundle:Default:login }
+
+rick_app_secured:
+    path:     /secured
+    defaults: { _controller: RickAppBundle:Default:secured }
+
+rick_app_login_check:
+    path:     /login_check
+
+rick_app_logout:
+    path:     /logout

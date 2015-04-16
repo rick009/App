@@ -1,3 +1,5 @@
-app:
-    resource: "@AppBundle/Controller/"
-    type:     annotation
+rick_app:
+    resource: "@RickAppBundle/Resources/config/routing.yml"
+    prefix:   /app
+
+

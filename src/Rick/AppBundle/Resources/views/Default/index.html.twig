@@ -1,0 +1,20 @@
+{% extends '::base.html.twig' %}
+
+{% block body %}
+    <form action="{{ path("rick_app_login_check") }}" method="post" id="login">
+        {% if error %}
+            <div class="error">{{ error.message }}</div>
+        {% endif %}
+        <div>
+            <label for="name">名称：</label>
+            <input type="text" id="name" name="_username" value="">
+        </div>
+        <div>
+            <label for="password">密码：</label>
+            <input type="password" id="password" name="_password" value="">
+        </div>
+        <div>
+            <button type="submit">登录</button>
+        </div>
+    </form>
+{% endblock %}

@@ -1,0 +1,7 @@
+{% extends '::base.html.twig' %}
+
+{% block body %}
+    secured area!
+    <p>{{ username }}</p>
+    <a href="{{ path('rick_app_logout') }}">退出</a>
+{% endblock %}
