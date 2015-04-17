@@ -3,21 +3,19 @@
 namespace Rick\AppBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\Security\Core\SecurityContext;
-use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 class DefaultController extends Controller
 {
-    public function loginAction(Request $request)
+    public function loginAction()
     {
-        if ($request->attributes->has(SecurityContext::AUTHENTICATION_ERROR)) {
-            $error = $request->attributes->get(SecurityContext::AUTHENTICATION_ERROR);
-        } else {
-            $error = $request->getSession()->get(SecurityContext::AUTHENTICATION_ERROR);
-        }
+        $authenticationUtils = $this->get('security.authentication_utils');
+        $error = $authenticationUtils->getLastAuthenticationError();
+        $lastUsername = $authenticationUtils->getLastUsername();
 
         return $this->render('RickAppBundle:Default:index.html.twig', array(
             'error' => $error,
+            'lastUsername' => $lastUsername
         ));
     }
 
@@ -26,5 +24,10 @@ class DefaultController extends Controller
         return $this->render('RickAppBundle:Default:secured.html.twig', array(
             'username' => $this->getUser()->getUsername()
         ));
+    }
+
+    public function apiAction()
+    {
+        return new JsonResponse('Api area');
     }
 }

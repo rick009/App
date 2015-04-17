@@ -46,24 +46,43 @@ security:
             security: false
 
         # secures part of the application
-        demo_secured_area:
-            pattern:    ^/
+        app_form_login:
+            pattern:    ^/app
             # it's important to notice that in this case _demo_security_check and _demo_login
             # are route names and that they are specified in the AcmeDemoBundle
             form_login:
+#                authenticator: time_authenticator
                 check_path: rick_app_login_check
                 login_path: rick_app_login
                 use_referer: true
             logout:
                 path:   rick_app_logout
                 target: rick_app_login
-            #anonymous: ~
-            #http_basic:
-            #    realm: "Secured Demo Area"
+            remember_me:
+                key:      "%secret%"
+                lifetime: 604800 # 1 week in seconds
+                path:     /
+            switch_user: { role: ROLE_ADMIN }
+
+        demo_secured_area:
+            pattern: ^/demo
+            http_digest:
+                realm: "Secured Demo Area"
+                key: "my_digest_string"
+
+        api_secured_area:
+            pattern: ^/api
+            stateless: true
+            simple_preauth:
+                authenticator: apikey_authenticator
 
     # with these settings you can restrict or allow access for different parts
     # of your application based on roles, ip, host or methods
     # http://symfony.com/doc/current/cookbook/security/access_control.html
     access_control:
         - { path: ^/app/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/app/secured, roles: IS_AUTHENTICATED_FULLY }
+        - { path: ^/app/secured, roles: [IS_AUTHENTICATED_FULLY, IS_AUTHENTICATED_REMEMBERED] }
+        - { path: ^/api/secured, roles: [IS_AUTHENTICATED_FULLY, IS_AUTHENTICATED_REMEMBERED] }
+
+    access_decision_manager:
+        strategy: unanimous

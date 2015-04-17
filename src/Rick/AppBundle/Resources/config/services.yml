@@ -1,4 +1,18 @@
 services:
-#    rick_app.example:
-#        class: Rick\AppBundle\Example
-#        arguments: [@service_id, "plain_value", %parameter%]
+    security.access.blacklist_voter:
+        class:     Rick\AppBundle\Security\Authorization\Voter\ClientIpVoter
+        arguments: ["@request_stack", [127.0.0.2, 192.168.2.163]]
+        public:    false
+        tags:
+            - { name: security.voter }
+
+    time_authenticator:
+        class:     Rick\AppBundle\Security\TimeAuthenticator
+        arguments: ["@security.password_encoder"]
+
+    api_key_user_provider:
+        class: Rick\AppBundle\Security\ApiKeyUserProvider
+
+    apikey_authenticator:
+        class:     Rick\AppBundle\Security\ApiKeyAuthenticator
+        arguments: ["@api_key_user_provider"]

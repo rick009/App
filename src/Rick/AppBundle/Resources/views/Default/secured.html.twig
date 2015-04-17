@@ -3,5 +3,11 @@
 {% block body %}
     secured area!
     <p>{{ username }}</p>
+    {% if is_granted('ROLE_ADMIN') %}
+        <a href="{{ path('rick_app_secured', {'_switch_user': 'user'}) }}">切换用户</a>
+    {% endif %}
+    {% if is_granted('ROLE_PREVIOUS_ADMIN') %}
+    <a href="{{ path('rick_app_secured', {'_switch_user': '_exit'}) }}">退出切换用户</a>
+    {% endif %}
     <a href="{{ path('rick_app_logout') }}">退出</a>
 {% endblock %}

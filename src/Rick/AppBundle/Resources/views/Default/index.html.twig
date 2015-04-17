@@ -7,11 +7,16 @@
         {% endif %}
         <div>
             <label for="name">名称：</label>
-            <input type="text" id="name" name="_username" value="">
+            <input type="text" id="name" name="_username" value="{{ lastUsername }}">
         </div>
         <div>
             <label for="password">密码：</label>
             <input type="password" id="password" name="_password" value="">
+            <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+        </div>
+        <div>
+            <input type="checkbox" name="_remember_me" id="_remember_me" value="1">
+            <label for="_remember_me">记住我</label>
         </div>
         <div>
             <button type="submit">登录</button>

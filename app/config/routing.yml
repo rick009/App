@@ -1,5 +1,5 @@
 rick_app:
     resource: "@RickAppBundle/Resources/config/routing.yml"
-    prefix:   /app
+    prefix:   /
 
 
