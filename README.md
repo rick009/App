@@ -1,4 +1,4 @@
 App
 ===
 
-A Symfony project created on April 15, 2015, 5:18 pm.
+Symfony研究项目，主要研究symfony的各个特性。
